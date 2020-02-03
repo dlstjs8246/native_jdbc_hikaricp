@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 import native_jdbc_hikaricp.ds.DataSourceForC3P0;
 import native_jdbc_hikaricp.ds.DataSourceForDBCP;
-import native_jdbc_hikaricp.ds.DataSourceForHikari2;
+import native_jdbc_hikaricp.ds.MySqlDataSource;
 import native_jdbc_hikaricp.dto.Department;
 
 public class DepartmentMain {
@@ -51,7 +51,7 @@ public class DepartmentMain {
 	}
 
 	private static void hikaryConnect() {
-		try(Connection con = DataSourceForHikari2.getConnection()) {
+		try(Connection con = MySqlDataSource.getConnection()) {
 			sqlSelect(con);
 			sqlInsert(con);
 			sqlUpdate(con);

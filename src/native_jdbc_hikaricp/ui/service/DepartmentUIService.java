@@ -10,7 +10,7 @@ import native_jdbc_hikaricp.dao.DepartmentDao;
 import native_jdbc_hikaricp.dao.EmployeeDao;
 import native_jdbc_hikaricp.dao.impl.DepartmentDaoImpl;
 import native_jdbc_hikaricp.dao.impl.EmployeeDaoImpl;
-import native_jdbc_hikaricp.ds.DataSourceForHikari2;
+import native_jdbc_hikaricp.ds.MySqlDataSource;
 import native_jdbc_hikaricp.dto.Department;
 import native_jdbc_hikaricp.dto.Employee;
 
@@ -20,7 +20,7 @@ public class DepartmentUIService {
 	private EmployeeDao empDao;
 	public DepartmentUIService() {
 		try {
-			con = DataSourceForHikari2.getConnection();
+			con = MySqlDataSource.getConnection();
 			deptDao = DepartmentDaoImpl.getInstance();
 			empDao = EmployeeDaoImpl.getInstance();
 		} catch (SQLException e) {

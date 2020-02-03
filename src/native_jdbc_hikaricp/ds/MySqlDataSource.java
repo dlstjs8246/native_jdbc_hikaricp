@@ -9,7 +9,7 @@ import java.util.Properties;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-public class DataSourceForHikari2 {
+public class MySqlDataSource {
 	private static HikariDataSource ds;
 	private static int minIdle = 10;
 	private static int maxPoolSize = 100;
@@ -26,7 +26,7 @@ public class DataSourceForHikari2 {
 			System.out.println(e.getMessage());
 		}
 	}
-	private DataSourceForHikari2() {};
+	private MySqlDataSource() {};
 	
 	public static Connection getConnection() throws SQLException {
 		return ds.getConnection();

@@ -8,7 +8,7 @@ import native_jdbc_hikaricp.dao.impl.EmployeeDaoImpl;
 import native_jdbc_hikaricp.ds.DataSourceForC3P0;
 import native_jdbc_hikaricp.ds.DataSourceForDBCP;
 import native_jdbc_hikaricp.ds.DataSourceForHikari;
-import native_jdbc_hikaricp.ds.DataSourceForHikari2;
+import native_jdbc_hikaricp.ds.MySqlDataSource;
 
 public class HiKariCP_Main {
 	public static void main(String[] args) {
@@ -39,7 +39,7 @@ public class HiKariCP_Main {
 	}
 
 	private static void connectionToHikary() {
-		try(Connection con = DataSourceForHikari.getConnection(); Connection con2 = DataSourceForHikari2.getConnection();) {
+		try(Connection con = DataSourceForHikari.getConnection(); Connection con2 = MySqlDataSource.getConnection();) {
 			System.out.println(con);
 			System.out.println(con2);
 		} catch (SQLException e) {
