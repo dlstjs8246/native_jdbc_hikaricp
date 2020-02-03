@@ -127,7 +127,8 @@ ehthumbs_vista.db
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
-
+/logs/
+/logs/*.log
 # Windows Installer files
 *.cab
 *.msi
