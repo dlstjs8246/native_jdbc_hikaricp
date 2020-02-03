@@ -1,17 +1,32 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql5-16ff5575621-1ce7bd9583d60208": {
+		"mysql5-170098a8a71-4f4e041d568ba44e": {
 			"provider": "mysql",
 			"driver": "mysql5",
-			"name": "MySQL - mysql_study(user)",
+			"name": "MySQL - localhost(root)",
 			"save-password": true,
 			"read-only": false,
 			"configuration": {
 				"host": "localhost",
 				"port": "3306",
-				"database": "mysql_study",
-				"url": "jdbc:mysql://localhost:3306/mysql_study",
+				"url": "jdbc:mysql://localhost:3306/",
+				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
+				"type": "dev",
+				"handlers": {}
+			}
+		},
+		"mysql5-170099626f8-6edd30f19bfcc342": {
+			"provider": "mysql",
+			"driver": "mysql5",
+			"name": "MySQL - native_jdbc_study(user_native_jdbc_study)",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"database": "native_jdbc_study",
+				"url": "jdbc:mysql://localhost:3306/native_jdbc_study",
 				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
 				"type": "dev",
 				"handlers": {}
