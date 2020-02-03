@@ -7,6 +7,7 @@ public class Employee {
 	private Employee manager;
 	private int salary;
 	private Department dept;
+	private byte[] pic;
 	
 	public Employee() {
 		
@@ -25,6 +26,17 @@ public class Employee {
 		this.manager = manager;
 		this.salary = salary;
 		this.dept = dept;
+	}
+	
+	public Employee(int empNo, String empName, String title, Employee manager, int salary, Department dept,
+			byte[] pic) {
+		this.empNo = empNo;
+		this.empName = empName;
+		this.title = title;
+		this.manager = manager;
+		this.salary = salary;
+		this.dept = dept;
+		this.pic = pic;
 	}
 
 
@@ -86,12 +98,21 @@ public class Employee {
 	public void setDept(Department dept) {
 		this.dept = dept;
 	}
+	
+	public byte[] getPic() {
+		return pic;
+	}
+
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
+	}
 
 
 	@Override
 	public String toString() {
-		return String.format("%s, %s, %s, %s, %s, %s%n", empNo,
-				empName, title, manager.getEmpNo()==0?"null":manager.getEmpNo(), salary, dept.getDeptNo());
+		return String.format("%s, %s, %s, %s, %s, %s %s%n", empNo,
+				empName, title, manager.getEmpNo()==0?"null":manager.getEmpNo(), salary, dept.getDeptNo(),pic==null?"null":pic.length);
 	}	
 	
 	
