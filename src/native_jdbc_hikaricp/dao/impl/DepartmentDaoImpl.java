@@ -7,15 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import javax.management.RuntimeErrorException;
 
+import native_jdbc_hikaricp.LogUtil;
 import native_jdbc_hikaricp.dao.DepartmentDao;
 import native_jdbc_hikaricp.dto.Department;
 
 public class DepartmentDaoImpl implements DepartmentDao {
 	private static final DepartmentDaoImpl instance = new DepartmentDaoImpl();
-	private static Logger logger = LogManager.getLogger();
+	
 	private DepartmentDaoImpl() {}
 	
 	
@@ -29,7 +29,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		List<Department> list = new ArrayList<>();
 		try(PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery();) {
-			logger.trace(pstmt);
+			
 			while(rs.next()) {
 				list.add(getDepartment(rs));
 			}
@@ -46,14 +46,18 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
 
 	@Override
-	public int insertDepartment(Connection con, Department dept) throws SQLException {
+	public int insertDepartment(Connection con, Department dept) {
 		String sql = "insert into department values(?,?,?)";
 		try(PreparedStatement pstmt = con.prepareStatement(sql)) {
+			int res = 0;
 			pstmt.setInt(1, dept.getDeptNo());
 			pstmt.setString(2, dept.getDeptName());
 			pstmt.setInt(3, dept.getFloor());
-			logger.trace(pstmt);
-			return pstmt.executeUpdate();
+			LogUtil.prnLog(pstmt);
+			res = pstmt.executeUpdate();
+			return res;
+		} catch (SQLException e) {
+			throw new RuntimeException();
 		}
 	}
 
@@ -65,7 +69,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 			pstmt.setString(1, dept.getDeptName());
 			pstmt.setInt(2, dept.getFloor());
 			pstmt.setInt(3, dept.getDeptNo());
-			logger.trace(pstmt);
+			LogUtil.prnLog(pstmt);
 			return pstmt.executeUpdate();
 		}
 	}
@@ -76,7 +80,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		String sql = "delete from department where deptno = ?";
 		try(PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, dept.getDeptNo());
-			logger.trace(pstmt);
+			LogUtil.prnLog(pstmt);
 			return pstmt.executeUpdate();
 		}
 	}
@@ -87,7 +91,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		String sql = "select deptno,deptname,floor from department where deptno = ?";
 		try(PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, deptNo);
-			logger.trace(pstmt);
+			LogUtil.prnLog(pstmt);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					return getDepartment(rs);
