@@ -14,4 +14,5 @@ public interface EmployeeDao {
 	int insertEmployee(Connection con, Employee emp);
 	int updateEmployee(Connection con, Employee emp);
 	int deleteEmployee(Connection con, Employee emp);
+	List<Employee> procedureEmployeeByDeptNo(Connection con, int deptNo);
 }

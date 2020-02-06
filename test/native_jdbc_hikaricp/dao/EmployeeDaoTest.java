@@ -25,6 +25,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import native_jdbc_hikaricp.LogUtil;
 import native_jdbc_hikaricp.dao.impl.EmployeeDaoImpl;
 import native_jdbc_hikaricp.ds.MySqlDataSource;
 import native_jdbc_hikaricp.dto.Department;
@@ -161,6 +162,16 @@ public class EmployeeDaoTest {
 		Employee emp = new Employee(1004);
 		int res = dao.deleteEmployee(con, emp);
 		Assert.assertEquals(1, res);
+	}
+	@Test
+	public void test07ProcedureEmployeeByDeptNo() {
+		LogUtil.prnLog(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<Employee> lists;
+		lists = dao.procedureEmployeeByDeptNo(con, 1);
+		Assert.assertNotEquals(0, lists.size());
+		for(Employee e : lists) {
+			LogUtil.prnLog(e);
+		}
 	}
 
 }

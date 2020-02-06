@@ -1,5 +1,6 @@
 package native_jdbc_hikaricp.dao.impl;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -141,6 +142,24 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public List<Employee> procedureEmployeeByDeptNo(Connection con, int deptNo) {
+		List<Employee> list = new ArrayList<Employee>();
+		String sql = "{call procedure_01(?)}";
+		try(CallableStatement cs = con.prepareCall(sql)) {
+			cs.setInt(1, deptNo);
+			cs.executeUpdate();
+			try(ResultSet rs = cs.executeQuery()) {
+				while(rs.next()) {
+					list.add(getEmployeeAll(rs));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

@@ -17,3 +17,13 @@ insert into employee values
 (3427,'최종철','사원',3011,1500000,3,null);
 
 select * from employee;
+
+drop procedure if exists procedure_01;
+
+delimiter !!
+create procedure procedure_01(in in_dno int)
+begin
+	select * from employee where dno = in_dno;
+end !!
+delimiter ;
+call procedure_01(3);
